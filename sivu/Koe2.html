@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaavalaskin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .image-container img {
+            max-width: 400px;
+            border-radius: 8px;
+        }
+        .form-container {
+            flex-grow: 1;
+        }
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="image.jpg" alt="Kuva" />
+        </div>
+        <div class="form-container">
+            <h1>Ripustuslaskin</h1>
+            <div class="form-group">
+                <label for="h">1. Anna keskikorkeus:</label>
+                <input type="number" id="h" placeholder="1.">
+            </div>
+            <div class="form-group">
+                <label for="k">2. Anna kehyksen korkeus:</label>
+                <input type="number" id="k" placeholder="2.">
+            </div>
+            <div class="form-group">
+                <label for="r">3. Anna ripustimen etäisyys kehyksen yläreunasta :</label>
+                <input type="number" id="r" placeholder="3.">
+            </div>
+            <button onclick="laskeTulos()">Laske</button>
+            <div class="result" id="tulos"></div>
+        </div>
+    </div>
+
+    <script>
+        function laskeTulos() {
+            const h = parseFloat(document.getElementById('h').value);
+            const k = parseFloat(document.getElementById('k').value);
+            const r = parseFloat(document.getElementById('r').value);
+
+            if (isNaN(h) || isNaN(k) || isNaN(r)) {
+                document.getElementById('tulos').innerText = "Virhe: Syötä kaikki arvot oikein!";
+                return;
+            }
+if (r > k) {
+    document.getElementById('tulos').innerText = "Virhe: Ripustuspisteen etäisyys ei voi olla suurempi kuin kehyksen korkeus!";
+    return;
+}
+
+
+            const tulos = h + (k / 2 - r);
+            document.getElementById('tulos').innerText = `Ripustuspiste lattiasta: ${tulos.toFixed(0)}`;
+        }
+    </script>
+</body>
+</html>
